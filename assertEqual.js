@@ -6,6 +6,6 @@ const assertEqual = function(actual, expected) {
   }
 };
 
-// TEST CODE
+// TEST CODE 
 assertEqual("Lighthouse Labs", "Lighthouse Labs");
 assertEqual(1, 15);
