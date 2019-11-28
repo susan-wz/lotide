@@ -14,13 +14,13 @@ If no key with that given value is found, then it should return undefined.
 */
 
 // ACTUAL FUNCTION
-const findKeyByValue = function (objectToSearch, valueToFind) {
+const findKeyByValue = function(objectToSearch, valueToFind) {
   for (let item in objectToSearch) {
     if (objectToSearch[item] === valueToFind) {
       return item;
     }
   }
-}
+};
 
 // TEST CODE
 const bestTVShowsByGenre = { 
