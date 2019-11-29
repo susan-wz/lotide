@@ -1,5 +1,5 @@
 // assertEqual function
-const assertEqual = function(actual, expected) {
+const assertEqual = function (actual, expected) {
   if (actual === expected) {
     console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
   } else {
@@ -20,23 +20,31 @@ function eqArrays(arr1, arr2) {
   } return true;
 }
 
-/* Instructions
-take in two objects and returns true or false, based on a perfect match. 
-Needs identical keys with identical values
-*/
+// SOME HELPERS
+const isObject = function (object) {
+  if (typeof object === "object") {
+    return true;
+  } else {return false}
+}
 
 // ACTUAL FUNCTION TO WORK ON
-const eqObjects = function(object1, object2) {
-  if (Object.keys(object1).length !== Object.keys(object2).length) {
+const eqObjects = function (obj1, obj2) {
+  if (Object.keys(obj1).length !== Object.keys(obj2).length) {
     return false;
   } else {
-    for (let each of Object.keys(object1)) { 
-      if (Array.isArray(object1[each]) && (Array.isArray(object2[each]))) {
-        if (!eqArrays(object1[each],object2[each])) {
+    for (let item of Object.keys(obj1)) {
+      if (typeof obj1[item] !== typeof obj2[item]) {
+        return false;
+      } else if (isObject(obj1[item])) {
+        if (!eqObjects(obj1[item], obj2[item])) {
+          return false;
+        }
+      } else if (Array.isArray(obj1[item])) {
+        if (!eqArrays(obj1[item], obj2[item])) {
           return false;
         }
       } else {
-        if (object1[each] !== object2[each]) {
+        if (obj1[item] !== obj2[item]) {
           return false;
         }
       }
@@ -44,21 +52,18 @@ const eqObjects = function(object1, object2) {
   } return true;
 };
 
-/* TEST CODE for PRIMITIVES
-const ab = { a: "1", b: "2" };
-const ba = { b: "2", a: "1" };
-const abc = { a: "1", b: "2", c: "3" };
-console.log(eqObjects(ab, ba)); // => true
-console.log(eqObjects(ab, abc)); // => false
-assertEqual(eqObjects(ab, ba), true);
-assertEqual(eqObjects(ab, abc), false);
-*/
-
-// TEST FOR FOR ARRAYS
-const cd = { c: "1", d: ["2", 3] };
-const dc = { d: ["2", 3], c: "1" };
-const cd2 = { c: "1", d: ["2", 3, 4] };
-const dc2 = { d: [2, 3], c: "1" };
-assertEqual(eqObjects(cd, dc), true); // => true
-assertEqual(eqObjects(cd, cd2), false); // => false
-assertEqual(eqObjects(dc, dc2), false); // => false
+// TEST CODE FOR OBJECTS
+console.log(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })) // => true
+console.log(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })) // => false
+console.log(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 })) // => false
+console.log(eqObjects({
+  a: { z: 1 },
+  b: 2,
+  c: { q: 5, w: { t: 6 }, e: 7, r: 8 }
+},
+  {
+    a: { z: 1 },
+    b: 2,
+    c: { q: 5, w: { t: 6, h: 7 }, e: 7, r: 8 }
+  },
+)) // => false
