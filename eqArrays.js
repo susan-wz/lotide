@@ -28,6 +28,8 @@ function eqArrays(arr1, arr2) {
   } return true;
 }
 
+console.log(eqArrays(["1", ["2", 5, [7, 5]], "3", "4"], ["1", ["2", 5, [7, 5]], "3", "4"]));
+
 // TEST CODE
 assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true);
 assertEqual(eqArrays(["1", "2", "3"], ["1", "2", "3", "4"]), false)
