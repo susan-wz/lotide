@@ -14,9 +14,11 @@ function middle (arr) {
     theMiddle.push(arr[lowerMid], arr[upperMid]);
     return theMiddle;
   } else {
-    theMiddle.push(Math.floor(arr.length/2));
+    theMiddle.push(arr[Math.floor(arr.length/2)]);
     return theMiddle;
   }
 }
+
+console.log(middle([1, 2, 3]));
 
 module.exports = middle;
